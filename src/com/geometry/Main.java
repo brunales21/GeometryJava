@@ -1,13 +1,12 @@
 package com.geometry;
-import jdk.swing.interop.SwingInterOpUtils;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
 import java.util.*;
 import java.util.List;
 
 public class Main {
+
+    // Clean console
+    public static final String CLEAN_CONSOLE = "\033[H\033[2J";
 
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
@@ -85,26 +84,47 @@ public class Main {
     public static Random rand = new Random();
 
 
-
     public static void main(String[] args) {
-        drawChristmasTree(17, "/", "|", BLACK_BOLD_BRIGHT);
+        waterTree(40);
+    }
 
+    public static void waterChristmasTree(int maxHeight) {
+        for (int i = 1; i < maxHeight; i++) {
+            drawChristmasTree(i, "*", "|", BLACK_BOLD_BRIGHT);
+            sleep(100);
+            cleanConsole();
+        }
+    }
+
+    public static void waterTree(int maxHeight) {
+        for (int i = 1; i < maxHeight; i++) {
+            drawTree(i, "*", "|", GREEN, BLACK_BOLD_BRIGHT);
+            sleep(100);
+            cleanConsole();
+        }
     }
 
     public static void drawChristmasTree(int height, String leavesChar, String trunkChar, String trunkColor) {
-        int trunkBase = (height*2)/3;
-        drawTrianguloNav(height, leavesChar);
+        drawColorfulTriangle(height, leavesChar);
+        drawVRectangle(height, trunkChar, trunkColor, (height*2)/3);
+    }
+
+    public static void drawVRectangle(int height, String trunkChar, String trunkColor, int baseLen) {
         for (int i = 0; i<(height/2); i++) {
-            System.out.println(trunkColor+addMargin(stringOf(trunkChar, trunkBase), height-(trunkBase/2)));
+            System.out.println(trunkColor+addMargin(stringOf(trunkChar, baseLen), height-(baseLen/2)));
         }
     }
     public static void drawTree(int height, String leavesChar, String trunkChar, String leavesColor, String trunkColor) {
-        int trunkBase = (height*2)/3;
-        drawTriangle(height, leavesChar, GREEN);
-        for (int i = 0; i<(height/2); i++) {
-            System.out.println(trunkColor+addMargin(stringOf(trunkChar, trunkBase), height-(trunkBase/2)));
-        }
+        drawTriangle(height, leavesChar, leavesColor);
+        drawVRectangle(height, trunkChar, trunkColor, (height*2)/3);
     }
+
+    public static void drawDefaultTree(int height, String leavesChar, String trunkChar) {
+        drawTriangle(height, leavesChar, GREEN);
+        drawVRectangle(height, trunkChar, BLACK_BOLD_BRIGHT, (height*2)/3);
+    }
+
+
 
     public static void drawTriangle(int height, String c, String color) {
         //Nota: height = base/2
@@ -116,7 +136,7 @@ public class Main {
         }
     }
 
-    public static void drawTrianguloNav(int height, String c) {
+    public static void drawColorfulTriangle(int height, String c) {
         String a = c;
         for (int i = height; i > 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -130,7 +150,7 @@ public class Main {
         }
     }
 
-    public static void dibujarTriangulo3(int height) {
+    public static void drawTriangle3(int height) {
         String a = "*";
         for (int i = height; i > 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -245,6 +265,18 @@ public class Main {
     public static void getArray(Object [] array) {
         for (int i = 0; i<array.length; i++) {
             System.out.println(array[i]);
+        }
+    }
+
+    public static void cleanConsole() {
+        System.out.println(CLEAN_CONSOLE);
+    }
+
+    public static void sleep(long n) {
+        try {
+            Thread.sleep(n);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
