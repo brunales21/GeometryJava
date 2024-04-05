@@ -80,8 +80,8 @@ public class Main {
     public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
     public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
-    public static String[] colors = new String[] {GREEN_BOLD_BRIGHT, GREEN_BOLD_BRIGHT, GREEN_BOLD_BRIGHT, CYAN_BOLD_BRIGHT, PURPLE_BOLD_BRIGHT, YELLOW_BOLD_BRIGHT, RED_BOLD_BRIGHT, BLUE_BOLD_BRIGHT, WHITE_BOLD_BRIGHT};
-    public static Random rand = new Random();
+    public static final String[] colors = new String[] {GREEN_BOLD_BRIGHT, GREEN_BOLD_BRIGHT, GREEN_BOLD_BRIGHT, CYAN_BOLD_BRIGHT, PURPLE_BOLD_BRIGHT, YELLOW_BOLD_BRIGHT, RED_BOLD_BRIGHT, BLUE_BOLD_BRIGHT, WHITE_BOLD_BRIGHT};
+    public static final Random rand = new Random();
 
 
     public static void main(String[] args) {
